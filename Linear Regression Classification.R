@@ -1,0 +1,17 @@
+x1<-c(rnorm(100,5,2.5),rnorm(100,5,2),rnorm(100,5,3))
+x2<-c(rnorm(100,5,2),rnorm(100,10,2),rnorm(100,15,2))
+y<-c(rep(0,100),rep(1,100),rep(2,100))
+Rreg<-lm(y~x1+x2)
+dev.off()
+plot(c(0,10),c(0,20),type="n",bg="red")
+rect(0,0,10,20,col="skyblue")
+rect(0,0,10,20,col="lightblue")
+points(x1[1:100],x2[1:100],col="BLUE",pch=20)
+points(x1[101:200],x2[101:200],col="RED",pch=20)
+points(x1[201:300],x2[201:300],col="black",pch=20)
+x<-c(1:20000)/1000
+betas<-Rreg$coefficients
+y<-(0.5-betas[1]-betas[2]*x)/betas[3]
+lines(x,y,lwd=2,col="green")
+z<-(1.5-betas[1]-betas[2]*x)/betas[3]
+lines(x,z,lwd=2,col="green")
